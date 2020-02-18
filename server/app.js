@@ -1,8 +1,10 @@
 const express = require('express');
-const route = require('./route');
+
 const app = express();
 
 app.use(express.json());
-app.use(route);
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+app.listen(3000, () => {
+  console.log(`http://localhost:${port}`);
+});
