@@ -7,26 +7,33 @@ const popularResults = document.querySelector(".popular-results");
 const renderMovies = arr => {
   arr.map(el => {
     const item = document.createElement("div");
-    
+    item.classList.add("item");
+
+    const img = document.createElement("div");
+    img.classList.add("img");
     const poster_path = el.poster_path;
     const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
     const poster = document.createElement("img");
     poster.src = urlImage;
     poster.classList.add("poster");
-    item.appendChild(poster);
+    img.appendChild(poster);
+    item.appendChild(img);
 
+    const details = document.createElement("div");
+    details.classList.add("details");
     const title = document.createElement("h2");
     title.textContent = el.title;
-    item.appendChild(title);
+    details.appendChild(title);
 
-    const originalLang = document.createElement('p');
-    originalLang.textContent = el.original_language;
-    item.appendChild(originalLang);
+    const originalLang = document.createElement("p");
+    originalLang.textContent = `Original language: ${el.original_language}`;
+    details.appendChild(originalLang);
 
-    const overview = document.createElement('p');
+    const overview = document.createElement("p");
+    overview.classList.add("overview");
     overview.textContent = el.overview;
-    item.appendChild(overview);
-
+    details.appendChild(overview);
+    item.appendChild(details);
 
     popularResults.appendChild(item);
   });
@@ -36,32 +43,39 @@ const renderMovies = arr => {
 // search movies
 const searchMovies = movie => {
   const item = document.createElement("div");
+  item.classList.add("item");
 
-    const poster_path = movie.poster_path;
-    const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-    const poster = document.createElement("img");
-    poster.src = urlImage;
-    poster.classList.add("poster");
-    item.appendChild(poster);
-    
-    const title = document.createElement("h2");
-    title.textContent = movie.original_title;
-    item.appendChild(title);
+  const img = document.createElement("div");
+    img.classList.add("img");
+  const poster_path = movie.poster_path;
+  const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  const poster = document.createElement("img");
+  poster.src = urlImage;
+  poster.classList.add("poster");
+  img.appendChild(poster);
+  item.appendChild(img);
 
-    const originalLang = document.createElement('p');
-    originalLang.textContent = movie.original_language;
-    item.appendChild(originalLang);
+  const details = document.createElement("div");
+    details.classList.add("details");
+  const title = document.createElement("h2");
+  title.textContent = movie.original_title;
+  details.appendChild(title);
 
-    const releaseDate = document.createElement('p');
-    releaseDate.textContent = movie.release_date;
-    item.appendChild(releaseDate);
+  const originalLang = document.createElement("p");
+  originalLang.textContent = movie.original_language;
+  details.appendChild(originalLang);
 
-    const overview = document.createElement('p');
-    overview.textContent = movie.overview;
-    item.appendChild(overview);
+  const releaseDate = document.createElement("p");
+  releaseDate.textContent = movie.release_date;
+  details.appendChild(releaseDate);
 
-    searchResults.appendChild(item);
-    console.log(movie);
+  const overview = document.createElement("p");
+  overview.textContent = movie.overview;
+  details.appendChild(overview);
+  item.appendChild(details);
+
+  searchResults.appendChild(item);
+  console.log(movie);
 };
 
 // search movies
