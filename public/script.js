@@ -1,7 +1,7 @@
-const searchQuery = document.querySelector(".search-query");
-const searchBtn = document.querySelector(".search-btn");
-const searchResults = document.querySelector(".search-results");
-const popularResults = document.querySelector(".popular-results");
+const searchQuery = document.querySelector('.search-query');
+const searchBtn = document.querySelector('.search-btn');
+const searchResults = document.querySelector('.search-results');
+const popularResults = document.querySelector('.popular-results');
 
 // popular movies
 const renderMovies = arr => {
@@ -12,8 +12,9 @@ const renderMovies = arr => {
     const img = document.createElement("div");
     img.classList.add("img");
     const poster_path = el.poster_path;
+
     const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-    const poster = document.createElement("img");
+    const poster = document.createElement('img');
     poster.src = urlImage;
     poster.classList.add("poster");
     img.appendChild(poster);
@@ -22,6 +23,7 @@ const renderMovies = arr => {
     const details = document.createElement("div");
     details.classList.add("details");
     const title = document.createElement("h2");
+
     title.textContent = el.title;
     details.appendChild(title);
 
@@ -79,20 +81,20 @@ const searchMovies = movie => {
 };
 
 // search movies
-searchBtn.addEventListener("click", () => {
-  searchQuery.textContent = "";
-  fetch("/search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name: searchQuery.value })
+searchBtn.addEventListener('click', () => {
+  searchQuery.textContent = '';
+  fetch('/search', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: searchQuery.value }),
   })
-    .then(result => result.json())
-    .then(result => searchMovies(result.results[0]))
+    .then((result) => result.json())
+    .then((result) => searchMovies(result.results[0]))
     .catch(console.error);
 });
 
 // popular movies
-fetch("/movies")
-  .then(result => result.json())
-  .then(result => renderMovies(result.results))
+fetch('/movies')
+  .then((result) => result.json())
+  .then((result) => renderMovies(result.results))
   .catch(console.error);
