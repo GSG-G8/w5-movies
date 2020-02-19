@@ -1,7 +1,7 @@
 const express = require('express');
-// const route = require('./route');
 const path = require('path');
 const fetch = require('node-fetch');
+const handleError = require('./controller/error');
 require('dotenv').config();
 
 
@@ -26,6 +26,8 @@ app.get('/movies', (req, res) => {
     .catch(console.error);
 });
 
-// app.use(route);
+app.use(handleError.clientError);
+
+app.use(handleError.serverError);
 
 module.exports = app;
