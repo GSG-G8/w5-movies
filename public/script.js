@@ -1,7 +1,7 @@
-const searchQuery = document.querySelector(".search-query");
-const searchBtn = document.querySelector(".search-btn");
-const searchResults = document.querySelector(".search-results");
-const popularResults = document.querySelector(".popular-results");
+const searchQuery = document.querySelector('.search-query');
+const searchBtn = document.querySelector('.search-btn');
+const searchResults = document.querySelector('.search-results');
+const popularResults = document.querySelector('.popular-results');
 
 // popular movies
 const renderMovies = arr => {
@@ -34,6 +34,7 @@ const renderMovies = arr => {
 };
 
 // search movies
+
 const searchMovies = movie => {
   const item = document.createElement("div");
 
@@ -65,12 +66,12 @@ const searchMovies = movie => {
 };
 
 // search movies
-searchBtn.addEventListener("click", () => {
-  searchQuery.textContent = "";
-  fetch("/search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name: searchQuery.value })
+searchBtn.addEventListener('click', () => {
+  searchQuery.textContent = '';
+  fetch('/search', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: searchQuery.value }),
   })
     .then(result => result.json())
     .then(result => searchMovies(result.results[0]))
@@ -78,7 +79,7 @@ searchBtn.addEventListener("click", () => {
 });
 
 // popular movies
-fetch("/movies")
-  .then(result => result.json())
-  .then(result => renderMovies(result.results))
+fetch('/movies')
+  .then((result) => result.json())
+  .then((result) => renderMovies(result.results))
   .catch(console.error);
