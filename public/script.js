@@ -8,9 +8,25 @@ const renderMovies = arr => {
   arr.map(el => {
     const item = document.createElement("div");
     
+    const poster_path = el.poster_path;
+    const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const poster = document.createElement("img");
+    poster.src = urlImage;
+    poster.classList.add("poster");
+    item.appendChild(poster);
+
     const title = document.createElement("h2");
     title.textContent = el.title;
     item.appendChild(title);
+
+    const originalLang = document.createElement('p');
+    originalLang.textContent = el.original_language;
+    item.appendChild(originalLang);
+
+    const overview = document.createElement('p');
+    overview.textContent = el.overview;
+    item.appendChild(overview);
+
 
     popularResults.appendChild(item);
   });
@@ -18,17 +34,34 @@ const renderMovies = arr => {
 };
 
 // search movies
-const searchMovies = arr => {
-  arr.map(el => {
-    const item = document.createElement("div");
+const searchMovies = movie => {
+  const item = document.createElement("div");
+
+    const poster_path = movie.poster_path;
+    const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const poster = document.createElement("img");
+    poster.src = urlImage;
+    poster.classList.add("poster");
+    item.appendChild(poster);
     
     const title = document.createElement("h2");
-    title.textContent = el.original_title;
+    title.textContent = movie.original_title;
     item.appendChild(title);
 
+    const originalLang = document.createElement('p');
+    originalLang.textContent = movie.original_language;
+    item.appendChild(originalLang);
+
+    const releaseDate = document.createElement('p');
+    releaseDate.textContent = movie.release_date;
+    item.appendChild(releaseDate);
+
+    const overview = document.createElement('p');
+    overview.textContent = movie.overview;
+    item.appendChild(overview);
+
     searchResults.appendChild(item);
-  });
-  console.log(arr);
+    console.log(movie);
 };
 
 // search movies
@@ -40,7 +73,7 @@ searchBtn.addEventListener("click", () => {
     body: JSON.stringify({ name: searchQuery.value })
   })
     .then(result => result.json())
-    .then(result => searchMovies(result.results))
+    .then(result => searchMovies(result.results[0]))
     .catch(console.error);
 });
 
