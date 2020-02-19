@@ -4,18 +4,18 @@ const searchResults = document.querySelector('.search-results');
 const popularResults = document.querySelector('.popular-results');
 
 // popular movies
-const renderMovies = arr => {
-  arr.map(el => {
-    const item = document.createElement("div");
-    
-    const poster_path = el.poster_path;
+const renderMovies = (arr) => {
+  arr.map((el) => {
+    const item = document.createElement('div');
+
+    const { poster_path } = el;
     const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-    const poster = document.createElement("img");
+    const poster = document.createElement('img');
     poster.src = urlImage;
-    poster.classList.add("poster");
+    poster.classList.add('poster');
     item.appendChild(poster);
 
-    const title = document.createElement("h2");
+    const title = document.createElement('h2');
     title.textContent = el.title;
     item.appendChild(title);
 
@@ -35,34 +35,34 @@ const renderMovies = arr => {
 
 // search movies
 
-const searchMovies = movie => {
-  const item = document.createElement("div");
+const searchMovies = (movie) => {
+  const item = document.createElement('div');
 
-    const poster_path = movie.poster_path;
-    const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-    const poster = document.createElement("img");
-    poster.src = urlImage;
-    poster.classList.add("poster");
-    item.appendChild(poster);
-    
-    const title = document.createElement("h2");
-    title.textContent = movie.original_title;
-    item.appendChild(title);
+  const { poster_path } = movie;
+  const urlImage = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  const poster = document.createElement('img');
+  poster.src = urlImage;
+  poster.classList.add('poster');
+  item.appendChild(poster);
 
-    const originalLang = document.createElement('p');
-    originalLang.textContent = movie.original_language;
-    item.appendChild(originalLang);
+  const title = document.createElement('h2');
+  title.textContent = movie.original_title;
+  item.appendChild(title);
 
-    const releaseDate = document.createElement('p');
-    releaseDate.textContent = movie.release_date;
-    item.appendChild(releaseDate);
+  const originalLang = document.createElement('p');
+  originalLang.textContent = movie.original_language;
+  item.appendChild(originalLang);
 
-    const overview = document.createElement('p');
-    overview.textContent = movie.overview;
-    item.appendChild(overview);
+  const releaseDate = document.createElement('p');
+  releaseDate.textContent = movie.release_date;
+  item.appendChild(releaseDate);
 
-    searchResults.appendChild(item);
-    console.log(movie);
+  const overview = document.createElement('p');
+  overview.textContent = movie.overview;
+  item.appendChild(overview);
+
+  searchResults.appendChild(item);
+  console.log(movie);
 };
 
 // search movies
@@ -73,8 +73,8 @@ searchBtn.addEventListener('click', () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: searchQuery.value }),
   })
-    .then(result => result.json())
-    .then(result => searchMovies(result.results[0]))
+    .then((result) => result.json())
+    .then((result) => searchMovies(result.results[0]))
     .catch(console.error);
 });
 
