@@ -3,6 +3,8 @@ const searchBtn = document.querySelector('.search-btn');
 const searchResults = document.querySelector('.search-results');
 const popularResults = document.querySelector('.popular-results');
 
+const errorMsg = document.querySelector('.error-msg');
+
 // popular movies
 const renderMovies = arr => {
   arr.map(el => {
@@ -64,25 +66,33 @@ const searchMovies = movie => {
   details.appendChild(title);
 
   const originalLang = document.createElement("p");
-  originalLang.textContent = movie.original_language;
+  originalLang.textContent = `Original language: ${movie.original_language}`;
   details.appendChild(originalLang);
 
   const releaseDate = document.createElement("p");
-  releaseDate.textContent = movie.release_date;
+  releaseDate.textContent = `Release date: ${movie.release_date}`;
   details.appendChild(releaseDate);
 
   const overview = document.createElement("p");
   overview.textContent = movie.overview;
+  overview.classList.add("overview");
   details.appendChild(overview);
   item.appendChild(details);
 
   searchResults.appendChild(item);
+  searchResults.replaceChild(item, searchResults.firstChild);
+  searchQuery.value = '';
   console.log(movie);
 };
 
 // search movies
 searchBtn.addEventListener('click', () => {
-  searchQuery.textContent = '';
+  if (searchQuery.value === null || searchQuery.value === '') {
+    errorMsg.style.display = 'block';
+    searchQuery.style.boxShadow = '1px 1px 10px 4px #c4414c';
+  } else {
+    errorMsg.style.display = 'none';
+    searchQuery.style.boxShadow = '';
   fetch('/search', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -91,6 +101,7 @@ searchBtn.addEventListener('click', () => {
     .then((result) => result.json())
     .then((result) => searchMovies(result.results[0]))
     .catch(console.error);
+  }
 });
 
 // popular movies
