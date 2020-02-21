@@ -21,7 +21,7 @@ test('Testing endpoint /search', (done) => {
     .set({
       'Content-Type': 'application/json',
     })
-    .send(JSON.stringify({ movies: 'hobbit' }))
+    .send(JSON.stringify({ title: 'hobbit' }))
     .expect(200)
     .end((err, res) => {
       if (err) return done(err);
