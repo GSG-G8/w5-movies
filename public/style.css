@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  color: #000;
+  color: #353535;
 }
 
 .container {
@@ -35,12 +35,17 @@ header p {
   margin: 20px 0;
 }
 
+label {
+  display: none;
+}
+
 .search-query {
   padding: 12px 10px;
   border-radius: 8px;
   width: 400px;
   border: none;
   font-size: 16px;
+  background-color: #f5dad6;
 }
 
 .search-query:focus {
@@ -65,6 +70,13 @@ header p {
 
 .search-btn:focus {
   outline: none;
+}
+
+.error-msg {
+  color: #c4414c;
+  font-weight: 500;
+  font-size: 20px;
+  display: none;
 }
 
 /* movies */
@@ -106,6 +118,7 @@ header p {
   letter-spacing: 2px;
   font-size: 32px;
   text-transform: uppercase;
+  margin-top: 70px;
   margin-bottom: 30px;
   text-align: center;
   color: #c4414c;
